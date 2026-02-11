@@ -19,7 +19,7 @@ export interface FormField {
 
 interface PredictionResult {
   riskLevel: "low" | "moderate" | "high";
-  confidence: number;
+  probability: number;
   recommendation: string;
 }
 
@@ -33,7 +33,7 @@ interface DisorderPageProps {
 
 const riskConfig = {
   low: { label: "Low Risk", color: "bg-success text-success-foreground", border: "border-success" },
-  moderate: { label: "Moderate Risk", color: "bg-warning text-warning-foreground", border: "border-warning" },
+  moderate: { label: "Borderline", color: "bg-warning text-warning-foreground", border: "border-warning" },
   high: { label: "High Risk", color: "bg-destructive text-destructive-foreground", border: "border-destructive" },
 };
 
@@ -65,17 +65,46 @@ const DisorderPage = ({ title, description, whyItMatters, fields, icon }: Disord
     setLoading(true);
     setResult(null);
 
-    // Simulate API call — replace with real POST to /predict
-    await new Promise((r) => setTimeout(r, 2000));
+    try {
+      // Send form values to Flask API
+      const payload: Record<string, number> = {};
+      for (const field of fields) {
+        payload[field.name] = parseFloat(formData[field.name]);
+      }
 
-    const mockRisk: PredictionResult = {
-      riskLevel: ["low", "moderate", "high"][Math.floor(Math.random() * 3)] as PredictionResult["riskLevel"],
-      confidence: Math.round(70 + Math.random() * 25),
-      recommendation:
-        "Based on the provided clinical parameters, we recommend consulting with a healthcare professional for further evaluation and comprehensive diagnostic testing.",
-    };
-    setResult(mockRisk);
-    setLoading(false);
+      const res = await fetch("http://localhost:5000/predict/pcos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || "Prediction failed");
+      }
+
+      const data = await res.json();
+
+      // Map API response to frontend PredictionResult
+      const riskMap: Record<string, PredictionResult["riskLevel"]> = {
+        Low: "low",
+        Borderline: "moderate",
+        High: "high",
+      };
+
+      const predictionResult: PredictionResult = {
+        riskLevel: riskMap[data.risk_level] || "moderate",
+        probability: Math.round(data.probability * 100),
+        recommendation: data.diagnosis,
+      };
+
+      setResult(predictionResult);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Something went wrong";
+      alert(message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -187,7 +216,7 @@ const DisorderPage = ({ title, description, whyItMatters, fields, icon }: Disord
                 </div>
               </div>
               <p className="text-3xl font-display font-bold text-foreground mb-2">
-                {result.confidence}% Confidence
+                {result.probability}% PCOS Probability
               </p>
               <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed text-sm mt-4">
                 {result.recommendation}

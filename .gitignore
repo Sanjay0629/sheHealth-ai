@@ -1,0 +1,65 @@
+# =========================
+# Node / Frontend
+# =========================
+node_modules/
+dist/
+build/
+*.local
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# =========================
+# Python / Backend
+# =========================
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Jupyter
+.ipynb_checkpoints/
+
+# =========================
+# ML / Model artifacts
+# =========================
+*.h5
+*.hdf5
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.onnx
+*.tflite
+
+# =========================
+# Misc
+# =========================
+*.bak
+*.tmp
+*.temp
+.cache/
