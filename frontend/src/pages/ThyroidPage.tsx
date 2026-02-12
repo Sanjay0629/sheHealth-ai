@@ -23,7 +23,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 
 // ─── API URL ────────────────────────────────────────────────────────────────────
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = import.meta.env.VITE_THYROID_API_URL || "http://localhost:5001";
 
 // ─── Types ──────────────────────────────────────────────────────────────────────
 interface PredictionResult {
