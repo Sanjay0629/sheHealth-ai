@@ -23,7 +23,7 @@ import {
 
 // ─── API URL ────────────────────────────────────────────────────────────────────
 const API_URL =
-  import.meta.env.VITE_OSTEOPOROSIS_API_URL || "http://localhost:5000";
+  import.meta.env.VITE_OSTEOPOROSIS_API_URL || "http://localhost:5002";
 
 // ─── Types ──────────────────────────────────────────────────────────────────────
 interface PredictionResult {
