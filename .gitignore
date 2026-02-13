@@ -55,6 +55,7 @@ build/
 *.pth
 *.onnx
 *.tflite
+*.keras
 
 # =========================
 # Misc
