@@ -158,12 +158,7 @@ class BreastCancerPredictor:
             'low_confidence': False
         }
         
-        # Check confidence threshold (75%)
-        if confidence < 0.75:
-            result['risk_level'] = "Uncertain"
-            result['diagnosis'] = "Please upload a valid breast ultrasound image"
-            result['low_confidence'] = True
-            return result
+
             
         # Determine diagnosis and risk level based on class
         if predicted_class == 'malignant':

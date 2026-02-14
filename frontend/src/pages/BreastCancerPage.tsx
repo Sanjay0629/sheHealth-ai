@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
 interface PredictionResult {
-  riskLevel: "low" | "moderate" | "high";
+  riskLevel: "low" | "moderate" | "high" | "unknown";
   probability: number;
   classification: string;
   recommendation: string;
@@ -41,6 +41,12 @@ const riskConfig = {
     color: "bg-destructive text-destructive-foreground",
     border: "border-destructive",
     glow: "shadow-[0_0_24px_-4px_hsl(0_72%_55%/0.3)]",
+  },
+  unknown: {
+    label: "Invalid Image",
+    color: "bg-muted text-muted-foreground",
+    border: "border-muted",
+    glow: "",
   },
 };
 
@@ -154,10 +160,11 @@ const BreastCancerPage = () => {
         Low: "low",
         Borderline: "moderate",
         High: "high",
+        "Invalid Input": "unknown",
       };
 
       const predictionResult: PredictionResult = {
-        riskLevel: riskMap[data.risk_level] || "moderate",
+        riskLevel: riskMap[data.risk_level] || "unknown",
         probability: Math.round(data.probability * 100),
         classification: data.classification || "—",
         recommendation: data.diagnosis || data.recommendation || "",
@@ -385,7 +392,7 @@ const BreastCancerPage = () => {
                 </div>
               </div>
               <p className="text-3xl font-display font-bold text-foreground mb-1">
-                {result.probability}% Confidence
+                {result.probability}% Probability
               </p>
               <p className="text-base font-medium text-foreground/80 mb-4">
                 Classification: {result.classification}
