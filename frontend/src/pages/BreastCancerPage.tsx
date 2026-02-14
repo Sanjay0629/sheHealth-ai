@@ -1,3 +1,5 @@
+
+
 import { useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -23,13 +25,13 @@ interface PredictionResult {
 
 const riskConfig = {
   low: {
-    label: "Benign",
+    label: "Normal",
     color: "bg-success text-success-foreground",
     border: "border-success",
     glow: "shadow-[0_0_24px_-4px_hsl(142_72%_42%/0.3)]",
   },
   moderate: {
-    label: "Uncertain",
+    label: "Benign",
     color: "bg-warning text-warning-foreground",
     border: "border-warning",
     glow: "shadow-[0_0_24px_-4px_hsl(38_92%_55%/0.3)]",
@@ -133,7 +135,7 @@ const BreastCancerPage = () => {
         });
       }, 200);
 
-      const res = await fetch("http://localhost:5003/predict/breast-cancer", {
+      const res = await fetch("http://localhost:5004/predict/breast-cancer", {
         method: "POST",
         body: formData,
       });
@@ -223,10 +225,9 @@ const BreastCancerPage = () => {
                 className={`
                   relative cursor-pointer rounded-xl border-2 border-dashed transition-all duration-300
                   flex flex-col items-center justify-center py-16 md:py-20 gap-4
-                  ${
-                    dragActive
-                      ? "border-primary bg-accent/60 scale-[1.01]"
-                      : "border-border hover:border-primary/50 hover:bg-accent/30"
+                  ${dragActive
+                    ? "border-primary bg-accent/60 scale-[1.01]"
+                    : "border-border hover:border-primary/50 hover:bg-accent/30"
                   }
                 `}
               >
