@@ -129,7 +129,7 @@ Repeat these steps for the other model directories (`breast-cancer`, `osteoporos
     ```json
     {
       "Gender": 1,
-      "Hemoglobin": 12.5,
+      "Hemoglobin": 12.6
       "MCH": 29.0,
       "MCHC": 34.0,
       "MCV": 85.0
