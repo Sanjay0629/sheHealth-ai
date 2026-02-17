@@ -41,7 +41,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-hero-subtle opacity-60" />
         <div className="absolute top-20 right-0 w-[600px] h-[600px] rounded-full bg-primary/5 blur-3xl" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-secondary/30 blur-3xl" />
-        
+
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={0}>
@@ -136,13 +136,13 @@ const Index = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {disorders.map((d, i) => (
               <motion.div key={d.title} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i}>
-                <Link to={d.path} className="group block bg-background rounded-2xl border border-border p-6 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1">
+                <Link to={d.path} className="group flex flex-col h-full bg-background rounded-2xl border border-border p-6 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1">
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${d.color} flex items-center justify-center text-primary-foreground mb-4 group-hover:scale-110 transition-transform`}>
                     {d.icon}
                   </div>
                   <h3 className="font-display font-semibold text-foreground mb-2">{d.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">{d.desc}</p>
-                  <span className="text-xs font-semibold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-grow">{d.desc}</p>
+                  <span className="text-xs font-semibold text-primary flex items-center gap-1 group-hover:gap-2 transition-all mt-auto">
                     Screen Now <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </Link>
