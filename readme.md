@@ -1,139 +1,135 @@
-# 🌸 sheHealth-AI
+# sheHealth-AI
 
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-⚡-646CFF?logo=vite&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)
-![Flask](https://img.shields.io/badge/Flask-Python-black?logo=flask&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Status](https://img.shields.io/badge/Status-Active-success)
-
-**sheHealth-AI** is a comprehensive, AI-powered health prediction platform focused on **women’s health**.  
-It leverages multiple **machine learning models**, each deployed as an independent backend service, and exposes them through a **modern, responsive web interface**.
-
-The platform provides predictive insights for:
-- Anemia  
-- Breast Cancer  
-- PCOS  
-- Thyroid Disorders  
-- Osteoporosis  
-
----
+sheHealth-AI is a comprehensive, AI-powered health prediction platform focused on women's health. It utilizes machine learning models to provide predictive insights for various health conditions, accessible through a modern, responsive web interface. 
 
 ## 🛠 Tech Stack
 
 ### Frontend
-- **Framework:** React 18 + TypeScript (Vite)
-- **Styling & UI:** Tailwind CSS, Shadcn UI, Radix UI
-- **Routing:** React Router DOM
-- **Animations:** Framer Motion
-- **Data Visualization:** Recharts
-- **Forms & Validation:** React Hook Form, Zod
-- **Testing:** Vitest, React Testing Library
+* **Framework:** React 18 with TypeScript and Vite
+* **Styling & UI:** Tailwind CSS, Shadcn UI, Radix UI primitives
+* **Routing:** React Router DOM
+* **Animations:** Framer Motion
+* **Data Visualization:** Recharts
+* **Forms & Validation:** React Hook Form, Zod
+* **Testing:** Vitest, React Testing Library
 
 ### Backend
-- **Framework:** Python (Flask)
-- **Architecture:** Microservices-based ML prediction services
-- **CORS:** Flask-CORS
-- **Model Serving:** Independent Flask APIs per disease
-
----
+* **Framework:** Python with Flask
+* **Architecture:** Microservices-based model prediction services
+* **CORS:** Flask-CORS for cross-origin resource sharing
 
 ## 📦 Project Structure
 
+The project is divided into a frontend web application and multiple independent backend prediction models:
+
+```text
 sheHealth-ai/
-├── frontend/ # React + Vite web application
+├── frontend/                              # React/Vite web application
 └── backend/
-├── anemia-backend-model/ # Anemia prediction service (Port 5003)
-├── breast-cancer-backend-model/ # Breast Cancer prediction service
-├── osteoporosis-backend-model/ # Osteoporosis prediction service
-├── pcos-backend-model/ # PCOS prediction service
-└── thyroid-backend-model/ # Thyroid prediction service
-
-
-Each backend model runs as an **independent Flask service**, enabling modular development and scalable deployment.
-
----
+    ├── anemia-backend-model/              # Flask service for Anemia prediction (Port 5003)
+    ├── breast-cancer-backend-model/       # Flask service for Breast Cancer prediction
+    ├── osteoporosis-backend-model/        # Flask service for Osteoporosis prediction
+    ├── pcos-backend-model/                # Flask service for PCOS prediction
+    └── thyroid-backend-model/             # Flask service for Thyroid prediction
+```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- **Node.js** v16 or higher
-- **Python** 3.8+
-- **pip** (Python package manager)
+* [Node.js](https://nodejs.org/) (v16 or higher recommended)
+* [Python 3.8+](https://www.python.org/)
+* `pip` package manager
 
----
+### Frontend Setup
 
-## 🌐 Frontend Setup
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Build for production:
+   ```bash
+   npm run build
+   ```
 
+### Backend Setup (Example: Anemia Model)
+
+Each model runs as its own standalone Flask service. 
+
+1. Navigate to the specific model's backend directory:
+   ```bash
+   cd backend/anemia-backend-model
+   ```
+2. (Optional but recommended) Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   # On macOS/Linux:
+   source venv/bin/activate  
+   # On Windows: 
+   venv\Scripts\activate
+   ```
+3. Install the required Python packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Run the Flask application:
+   ```bash
+   python app.py
+   ```
+   *Note: The Anemia service runs on `http://0.0.0.0:5003`.*
+
+Repeat these steps for the other model directories (`breast-cancer`, `osteoporosis`, `pcos`, `thyroid`) as needed.
+
+## 🔌 API Reference
+
+### Anemia Prediction API (`/backend/anemia-backend-model/`)
+
+#### Health Check
+* **Endpoint:** `/health`
+* **Method:** `GET`
+* **Description:** Checks if the prediction service is running.
+* **Response:**
+    ```json
+    {
+      "status": "running",
+      "service": "Anemia Prediction API"
+    }
+    ```
+
+#### Predict Anemia
+* **Endpoint:** `/predict/anemia`
+* **Method:** `POST`
+* **Headers:** `Content-Type: application/json`
+* **Body Requirements:**
+    ```json
+    {
+      "Gender": 1,
+      "Hemoglobin": 12.5,
+      "MCH": 29.0,
+      "MCHC": 34.0,
+      "MCV": 85.0
+    }
+    ```
+* **Description:** Returns the prediction result based on the provided blood test metrics.
+
+## 🧪 Testing
+
+The frontend includes a testing suite configured with Vitest.
+
+To run tests in watch mode:
 ```bash
 cd frontend
-npm install
-npm run dev
-
-🧠 Backend Setup (Example: Anemia Model)
-
-cd backend/anemia-backend-model
-python -m venv venv
-Activate virtual environment:
-
-Windows
-
-venv\Scripts\activate
-Linux / macOS
-
-source venv/bin/activate
-Install dependencies:
-
-pip install -r requirements.txt
-Run the service:
-
-python app.py
-🔹 Service URL: http://0.0.0.0:5003
-
-Repeat the same steps for other backend services.
-
-🔌 API Reference
-🩸 Anemia Prediction API
-Health Check
-
-Endpoint: /health
-Method: GET
-
-{
-  "status": "running",
-  "service": "Anemia Prediction API"
-}
-
-Predict Anemia
-
-Endpoint: /predict/anemia
-Method: POST
-
-Headers
-
-Content-Type: application/json
-
-
-Request Body
-
-{
-  "Gender": 1,
-  "Hemoglobin": 12.5,
-  "MCH": 29.0,
-  "MCHC": 34.0,
-  "MCV": 85.0
-}
-
-🧪 Testing
-
-Run frontend tests:
-
-cd frontend
-npm run test
-
-
-Watch mode:
-
 npm run test:watch
+```
+
+To run a single test pass:
+```bash
+npm run test
+```
