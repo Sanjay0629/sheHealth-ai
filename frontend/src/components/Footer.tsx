@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { HeartPulse, Shield } from "lucide-react";
+import { HeartPulse } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -19,10 +19,7 @@ const Footer = () => {
             <p className="text-sm text-muted-foreground leading-relaxed">
               AI-powered clinical decision-support system for early risk assessment of common female health disorders.
             </p>
-            <div className="flex items-center gap-2 mt-4 text-xs text-muted-foreground">
-              <Shield className="w-3.5 h-3.5" />
-              <span>HIPAA-Aware Design</span>
-            </div>
+
           </div>
 
           {/* Quick Links */}
