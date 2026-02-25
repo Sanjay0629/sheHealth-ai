@@ -1,7 +1,6 @@
 import os
 import numpy as np
 import tensorflow as tf
-import tensorflow as tf
 import tf_keras as keras
 from PIL import Image
 import io
